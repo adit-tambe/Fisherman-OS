@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fisherman OS — The Intelligence Layer Between the Ocean and the Fisherman</title>
+    <meta name="description" content="WhatsApp-native intelligence platform for India's 4 million artisanal fishermen. Hyperlocal weather, fish zone predictions, market prices, and safety — all on WhatsApp.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-brand">
+            <span class="nav-logo">🌊</span>
+            <span class="nav-name">Fisherman OS</span>
+        </div>
+        <div class="nav-links">
+            <a href="#problem" class="nav-link">Problem</a>
+            <a href="#solution" class="nav-link">Solution</a>
+            <a href="#market" class="nav-link">Market</a>
+            <a href="#traction" class="nav-link">Traction</a>
+            <a href="#team" class="nav-link">Team</a>
+            <a href="#ask" class="nav-link nav-cta">Get in Touch</a>
+        </div>
+        <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="#problem" class="mobile-link">Problem</a>
+        <a href="#solution" class="mobile-link">Solution</a>
+        <a href="#market" class="mobile-link">Market</a>
+        <a href="#traction" class="mobile-link">Traction</a>
+        <a href="#team" class="mobile-link">Team</a>
+        <a href="#ask" class="mobile-link">Get in Touch</a>
+    </div>
+
+    <!-- Slide 1: Hero -->
+    <section class="slide slide-hero" id="hero">
+        <div class="hero-bg-overlay"></div>
+        <div class="hero-particles" id="particles"></div>
+        <div class="hero-content">
+            <div class="hero-badge">🌊 Blue Economy × Climate Adaptation</div>
+            <h1 class="hero-title">
+                <span class="hero-title-line">The Intelligence Layer</span>
+                <span class="hero-title-line gradient-text">Between the Ocean</span>
+                <span class="hero-title-line">and the Fisherman</span>
+            </h1>
+            <p class="hero-subtitle">
+                WhatsApp-native weather, fish zone predictions, and market prices for India's 4 million artisanal fishermen — saving lives, fuel, and livelihoods.
+            </p>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="hero-stat-number" data-count="4">0</span><span class="hero-stat-suffix">M</span>
+                    <span class="hero-stat-label">Fishermen</span>
+                </div>
+                <div class="hero-stat-divider"></div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number" data-count="23">0</span><span class="hero-stat-suffix">B</span>
+                    <span class="hero-stat-label">Market ($USD)</span>
+                </div>
+                <div class="hero-stat-divider"></div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number" data-count="60">0</span><span class="hero-stat-suffix">%</span>
+                    <span class="hero-stat-label">Fuel Savings</span>
+                </div>
+            </div>
+            <div class="hero-cta-group">
+                <a href="#solution" class="btn btn-primary">See the Solution →</a>
+                <a href="#problem" class="btn btn-ghost">Learn the Problem</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- Slide 2: Problem -->
+    <section class="slide slide-problem" id="problem">
+        <div class="slide-inner">
+            <div class="section-label">THE PROBLEM</div>
+            <h2 class="section-title">4 Million Fishermen Make<br><span class="gradient-text">Life-or-Death Decisions</span> Blindly</h2>
+            
+            <div class="problem-grid">
+                <div class="problem-card" data-delay="0">
+                    <div class="problem-icon">⛈️</div>
+                    <h3>Dangerous Weather Decisions</h3>
+                    <p>775 fishermen killed and 113 went missing in Kerala alone (2011-2024). Cyclone Ockhi killed 159 in a single event. Most had no warning.</p>
+                    <div class="problem-stat">
+                        <span class="problem-stat-number">775</span>
+                        <span class="problem-stat-label">Lives lost in one state</span>
+                    </div>
+                </div>
+                <div class="problem-card" data-delay="100">
+                    <div class="problem-icon">⛽</div>
+                    <h3>Fuel Burned on Blind Scouting</h3>
+                    <p>Diesel accounts for 60-70% of trip costs. Fishermen spend 2-3 hours "scouting" — burning ₹1,500-3,000 on zero-catch days just looking for fish.</p>
+                    <div class="problem-stat">
+                        <span class="problem-stat-number">70%</span>
+                        <span class="problem-stat-label">of costs = diesel fuel</span>
+                    </div>
+                </div>
+                <div class="problem-card" data-delay="200">
+                    <div class="problem-icon">📉</div>
+                    <h3>Price Exploitation by Middlemen</h3>
+                    <p>Zero price transparency. Fishermen sell at whatever the first buyer offers. One market pays ₹60/kg while another pays ₹120/kg for the same fish, same morning.</p>
+                    <div class="problem-stat">
+                        <span class="problem-stat-number">40%</span>
+                        <span class="problem-stat-label">income lost to info asymmetry</span>
+                    </div>
+                </div>
+                <div class="problem-card" data-delay="300">
+                    <div class="problem-icon">📱</div>
+                    <h3>Their "Tool" Today: WhatsApp Forwards</h3>
+                    <p>Decision-making relies on group chat rumors, personal intuition, and Windy.com (which they can't read). No structured intelligence exists.</p>
+                    <div class="problem-stat">
+                        <span class="problem-stat-number">97.8%</span>
+                        <span class="problem-stat-label">don't use any fishing app</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="problem-quote">
+                <blockquote>
+                    "The ocean is hyperlocal. The forecasting isn't."
+                </blockquote>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 3: Solution -->
+    <section class="slide slide-solution" id="solution">
+        <div class="slide-inner">
+            <div class="section-label">THE SOLUTION</div>
+            <h2 class="section-title">A WhatsApp Bot That<br><span class="gradient-text">Thinks Like a Fisherman</span></h2>
+            <p class="section-desc">Not another app to download. Not another dashboard to learn. A simple WhatsApp message — in their language, with emojis they understand — delivered at 3:30 AM before they leave shore.</p>
+
+            <div class="solution-showcase">
+                <div class="solution-features">
+                    <div class="feature-card active" data-feature="weather">
+                        <div class="feature-number">01</div>
+                        <h3>Hyperlocal Sea State Forecast</h3>
+                        <p>6-hour weather forecasts at 1km × 1km resolution using ISRO satellite data. Simple 🟢🟡🔴 indicators. Wind, waves, rain — in Konkani, Malayalam, Tamil.</p>
+                        <div class="feature-tag">ISRO + INCOIS Data</div>
+                    </div>
+                    <div class="feature-card" data-feature="fishing">
+                        <div class="feature-number">02</div>
+                        <h3>AI Fish Zone Predictions</h3>
+                        <p>Sea surface temperature + chlorophyll density + crowd-sourced catch data = "Best fishing zone today: 12km SW of Betul." Reduces scouting time by 60%.</p>
+                        <div class="feature-tag">ML + Satellite + Crowd Data</div>
+                    </div>
+                    <div class="feature-card" data-feature="prices">
+                        <div class="feature-number">03</div>
+                        <h3>Real-Time Market Prices</h3>
+                        <p>Live prices from the 3 nearest landing centers. "Margao paying 29% more for mackerel today." Eliminates middleman exploitation.</p>
+                        <div class="feature-tag">FMPIS + Field Agents</div>
+                    </div>
+                    <div class="feature-card" data-feature="sos">
+                        <div class="feature-number">04</div>
+                        <h3>SOS Distress Beacon</h3>
+                        <p>Type "SOS" → GPS location shared with Coast Guard (1554) + emergency contacts. Real-time location tracking every 5 minutes until rescued.</p>
+                        <div class="feature-tag">Coast Guard Integration</div>
+                    </div>
+                </div>
+                <div class="solution-phone">
+                    <div class="phone-frame">
+                        <div class="phone-notch"></div>
+                        <div class="phone-screen">
+                            <div class="wa-header">
+                                <div class="wa-back">←</div>
+                                <div class="wa-avatar">🌊</div>
+                                <div class="wa-info">
+                                    <div class="wa-name">Fisherman OS ✓</div>
+                                    <div class="wa-status">online</div>
+                                </div>
+                            </div>
+                            <div class="wa-chat" id="wa-chat">
+                                <!-- Weather message -->
+                                <div class="wa-message wa-incoming visible" id="msg-weather">
+                                    <div class="wa-bubble">
+                                        <div class="wa-sender">Fisherman OS 🌊</div>
+                                        <div class="wa-text">
+                                            🌊 <strong>Betul Sea Forecast</strong><br>
+                                            📅 8 July 2026 | 3:30 AM<br><br>
+                                            ☀️ Today's Sea: <span class="wa-safe">🟢 SAFE TO GO</span><br><br>
+                                            🌬️ Wind: 12 km/h SW<br>
+                                            🌊 Waves: 0.8m (calm)<br>
+                                            🌧️ Rain: 20% after 2PM<br>
+                                            🌡️ Sea temp: 28.5°C<br><br>
+                                            ⚠️ Return before 2PM<br><br>
+                                            Next 6h: 🟢🟢🟢🟡🟡🟡
+                                        </div>
+                                        <div class="wa-time">3:30 AM ✓✓</div>
+                                    </div>
+                                </div>
+                                <!-- Price message -->
+                                <div class="wa-message wa-incoming" id="msg-prices">
+                                    <div class="wa-bubble">
+                                        <div class="wa-text">
+                                            🐟 <strong>Today's Prices</strong><br><br>
+                                            📍 <strong>Betul:</strong><br>
+                                            Mackerel ₹85 | Pomfret ₹320<br><br>
+                                            📍 <strong>Cutbona:</strong><br>
+                                            Mackerel ₹95 | Pomfret ₹350<br><br>
+                                            📍 <strong>Margao:</strong><br>
+                                            Mackerel <span class="wa-highlight">₹110 ↑29%</span> | Pomfret ₹380<br><br>
+                                            💡 Margao paying most today
+                                        </div>
+                                        <div class="wa-time">5:00 AM ✓✓</div>
+                                    </div>
+                                </div>
+                                <!-- User message -->
+                                <div class="wa-message wa-outgoing" id="msg-catch">
+                                    <div class="wa-bubble">
+                                        <div class="wa-text">CATCH mackerel 50kg</div>
+                                        <div class="wa-time">11:30 AM ✓✓</div>
+                                    </div>
+                                </div>
+                                <!-- Bot response -->
+                                <div class="wa-message wa-incoming" id="msg-logged">
+                                    <div class="wa-bubble">
+                                        <div class="wa-text">
+                                            ✅ Catch logged!<br><br>
+                                            📊 50kg Mackerel<br>
+                                            📍 12km SW of Betul<br>
+                                            ⏰ 11:30 AM<br><br>
+                                            🏆 You're helping other fishermen find better zones!
+                                        </div>
+                                        <div class="wa-time">11:30 AM ✓✓</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 4: Why WhatsApp -->
+    <section class="slide slide-why" id="why">
+        <div class="slide-inner">
+            <div class="section-label">WHY WHATSAPP</div>
+            <h2 class="section-title">Fishermen Don't Download Apps.<br><span class="gradient-text">They Use WhatsApp.</span></h2>
+            
+            <div class="comparison-table">
+                <div class="comparison-header">
+                    <div class="comparison-col"></div>
+                    <div class="comparison-col comp-old">Traditional App</div>
+                    <div class="comparison-col comp-new">Fisherman OS (WhatsApp)</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-col comp-label">Installation</div>
+                    <div class="comparison-col comp-old">Find on Play Store → Download → Sign up</div>
+                    <div class="comparison-col comp-new">Save number → Send "Hi" → Done ✅</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-col comp-label">Adoption Rate</div>
+                    <div class="comparison-col comp-old">89,000 users in 17 years (Fisher Friend)</div>
+                    <div class="comparison-col comp-new">Target: 89,000 in Year 1</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-col comp-label">Language</div>
+                    <div class="comparison-col comp-old">English UI with some translations</div>
+                    <div class="comparison-col comp-new">Native language + voice messages</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-col comp-label">Offline</div>
+                    <div class="comparison-col comp-old">Requires data connection</div>
+                    <div class="comparison-col comp-new">Messages queue & deliver on signal return</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="comparison-col comp-label">Virality</div>
+                    <div class="comparison-col comp-old">Zero — requires individual downloads</div>
+                    <div class="comparison-col comp-new">Forward number in existing fishing groups</div>
+                </div>
+            </div>
+
+            <div class="whatsapp-stat-banner">
+                <div class="ws-stat">
+                    <span class="ws-number">500M+</span>
+                    <span class="ws-label">WhatsApp users in India</span>
+                </div>
+                <div class="ws-stat">
+                    <span class="ws-number">0</span>
+                    <span class="ws-label">App downloads required</span>
+                </div>
+                <div class="ws-stat">
+                    <span class="ws-number">30s</span>
+                    <span class="ws-label">Time to onboard</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 5: Flywheel / Data Network Effect -->
+    <section class="slide slide-flywheel" id="flywheel">
+        <div class="slide-inner">
+            <div class="section-label">THE MOAT</div>
+            <h2 class="section-title">Every Catch Logged<br><span class="gradient-text">Makes Everyone Smarter</span></h2>
+            <p class="section-desc">The data network effect is our unfair advantage. No government agency, no competitor has crowd-sourced catch data at village-level granularity.</p>
+
+            <div class="flywheel-container">
+                <div class="flywheel-ring">
+                    <div class="flywheel-node" id="fw-node-1">
+                        <div class="fw-icon">🐟</div>
+                        <div class="fw-text">Fisherman<br>Logs Catch</div>
+                    </div>
+                    <div class="flywheel-arrow" id="fw-arrow-1">→</div>
+                    <div class="flywheel-node" id="fw-node-2">
+                        <div class="fw-icon">🧠</div>
+                        <div class="fw-text">AI Improves<br>Predictions</div>
+                    </div>
+                    <div class="flywheel-arrow" id="fw-arrow-2">→</div>
+                    <div class="flywheel-node" id="fw-node-3">
+                        <div class="fw-icon">🎯</div>
+                        <div class="fw-text">Better Fish<br>Zone Advice</div>
+                    </div>
+                    <div class="flywheel-arrow" id="fw-arrow-3">→</div>
+                    <div class="flywheel-node" id="fw-node-4">
+                        <div class="fw-icon">📈</div>
+                        <div class="fw-text">More Fishermen<br>Join</div>
+                    </div>
+                    <div class="flywheel-arrow" id="fw-arrow-4">→</div>
+                </div>
+                <div class="flywheel-center">
+                    <div class="flywheel-center-text">DATA<br>FLYWHEEL</div>
+                </div>
+            </div>
+
+            <div class="moat-cards">
+                <div class="moat-card">
+                    <div class="moat-icon">🔄</div>
+                    <h4>Network Effect</h4>
+                    <p>Each new user makes the product better for ALL users</p>
+                </div>
+                <div class="moat-card">
+                    <div class="moat-icon">📊</div>
+                    <h4>Proprietary Dataset</h4>
+                    <p>Village-level catch data that doesn't exist anywhere else</p>
+                </div>
+                <div class="moat-card">
+                    <div class="moat-icon">🤝</div>
+                    <h4>Cooperative Lock-in</h4>
+                    <p>Once embedded as official tool, switching costs are high</p>
+                </div>
+                <div class="moat-card">
+                    <div class="moat-icon">🌱</div>
+                    <h4>Carbon Credits</h4>
+                    <p>Quantified fuel savings → Verified Carbon Units → Revenue</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 6: Market -->
+    <section class="slide slide-market" id="market">
+        <div class="slide-inner">
+            <div class="section-label">MARKET SIZE</div>
+            <h2 class="section-title">A <span class="gradient-text">$23 Billion</span> Market<br>Waiting to Be Served</h2>
+
+            <div class="market-circles">
+                <div class="market-circle market-tam">
+                    <div class="market-circle-inner">
+                        <div class="market-circle-content market-sam">
+                            <div class="market-circle-inner">
+                                <div class="market-circle-content market-som">
+                                    <div class="market-circle-inner">
+                                        <span class="market-value">₹20Cr</span>
+                                        <span class="market-label">SOM (Yr 3)</span>
+                                    </div>
+                                </div>
+                                <span class="market-value sam-val">$5.4B</span>
+                                <span class="market-label sam-label">SAM</span>
+                            </div>
+                        </div>
+                        <span class="market-value tam-val">$22.95B</span>
+                        <span class="market-label tam-label">TAM</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="market-details">
+                <div class="market-detail">
+                    <h4>TAM — $22.95B</h4>
+                    <p>India's total marine fisheries market. 966M fish consumers. World's 2nd largest fish producer.</p>
+                </div>
+                <div class="market-detail">
+                    <h4>SAM — $5.4B</h4>
+                    <p>Annual fuel + operations spend by 2.5M small-scale fishermen with smartphone access.</p>
+                </div>
+                <div class="market-detail">
+                    <h4>SOM — ₹20Cr (Yr 3)</h4>
+                    <p>100K fishermen across 4 states. B2C subscriptions + B2G contracts + data licensing.</p>
+                </div>
+            </div>
+
+            <div class="market-expansion">
+                <h3>Expansion Roadmap</h3>
+                <div class="expansion-path">
+                    <div class="expansion-node active">
+                        <div class="exp-phase">Phase 1</div>
+                        <div class="exp-location">Goa Coast</div>
+                        <div class="exp-count">2,758 fishermen</div>
+                        <div class="exp-villages">41 villages</div>
+                    </div>
+                    <div class="expansion-connector"></div>
+                    <div class="expansion-node">
+                        <div class="exp-phase">Phase 2</div>
+                        <div class="exp-location">Kerala</div>
+                        <div class="exp-count">1.2 lakh fishermen</div>
+                        <div class="exp-villages">222 villages</div>
+                    </div>
+                    <div class="expansion-connector"></div>
+                    <div class="expansion-node">
+                        <div class="exp-phase">Phase 3</div>
+                        <div class="exp-location">TN + AP + KA</div>
+                        <div class="exp-count">4.3 lakh fishermen</div>
+                        <div class="exp-villages">1,272 villages</div>
+                    </div>
+                    <div class="expansion-connector"></div>
+                    <div class="expansion-node">
+                        <div class="exp-phase">Phase 4</div>
+                        <div class="exp-location">National</div>
+                        <div class="exp-count">4M fishermen</div>
+                        <div class="exp-villages">All coastal India</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 7: Impact / Traction Proof Points -->
+    <section class="slide slide-traction" id="traction">
+        <div class="slide-inner">
+            <div class="section-label">IMPACT & PROOF POINTS</div>
+            <h2 class="section-title">The Data Says<br><span class="gradient-text">This Already Works</span></h2>
+            <p class="section-desc">We're not guessing. Existing programs prove the underlying thesis. We're building the delivery layer they couldn't.</p>
+
+            <div class="proof-grid">
+                <div class="proof-card proof-big">
+                    <div class="proof-source">INCOIS PFZ Studies</div>
+                    <div class="proof-number">₹17,820</div>
+                    <div class="proof-label">Additional income per trip when fishermen use satellite-guided fishing zone data</div>
+                </div>
+                <div class="proof-card">
+                    <div class="proof-source">Fisher Friend App (MSSRF)</div>
+                    <div class="proof-number">60%</div>
+                    <div class="proof-label">Fuel savings when fishermen use PFZ + GPS navigation</div>
+                </div>
+                <div class="proof-card">
+                    <div class="proof-source">Stanford / Kerala Study</div>
+                    <div class="proof-number">8%</div>
+                    <div class="proof-label">Profit increase from mobile phone price transparency alone</div>
+                </div>
+                <div class="proof-card">
+                    <div class="proof-source">Fisher Friend</div>
+                    <div class="proof-number">40+</div>
+                    <div class="proof-label">Fishermen rescued via GPS location sharing features</div>
+                </div>
+                <div class="proof-card">
+                    <div class="proof-source">INCOIS Reach</div>
+                    <div class="proof-number">550K</div>
+                    <div class="proof-label">Fishermen already receiving PFZ advisories (demand exists)</div>
+                </div>
+                <div class="proof-card">
+                    <div class="proof-source">Govt Budget 2026-27</div>
+                    <div class="proof-number">₹2,761Cr</div>
+                    <div class="proof-label">Allocated for fisheries digital infrastructure (tailwind)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 8: Revenue Model -->
+    <section class="slide slide-revenue" id="revenue">
+        <div class="slide-inner">
+            <div class="section-label">BUSINESS MODEL</div>
+            <h2 class="section-title">Multiple Revenue Streams,<br><span class="gradient-text">Social Impact at Core</span></h2>
+
+            <div class="revenue-streams">
+                <div class="revenue-card">
+                    <div class="revenue-icon">👤</div>
+                    <h3>B2C Subscription</h3>
+                    <p>₹99/month per fisherman</p>
+                    <div class="revenue-calc">25K users × ₹99 × 12 = <strong>₹2.97Cr/yr</strong></div>
+                </div>
+                <div class="revenue-card">
+                    <div class="revenue-icon">🏛️</div>
+                    <h3>B2G Contracts</h3>
+                    <p>State Fisheries Dept licenses</p>
+                    <div class="revenue-calc">Per-state contracts = <strong>₹50L-2Cr/state/yr</strong></div>
+                </div>
+                <div class="revenue-card">
+                    <div class="revenue-icon">📊</div>
+                    <h3>Data Licensing</h3>
+                    <p>Anonymized catch + zone data</p>
+                    <div class="revenue-calc">Research orgs, FAO = <strong>₹25-50L/yr</strong></div>
+                </div>
+                <div class="revenue-card">
+                    <div class="revenue-icon">🌿</div>
+                    <h3>Carbon Credits</h3>
+                    <p>Verified fuel savings</p>
+                    <div class="revenue-calc">Quantified emissions reduction = <strong>₹10-30L/yr</strong></div>
+                </div>
+            </div>
+
+            <div class="revenue-projection">
+                <h3>Revenue Projection</h3>
+                <div class="projection-table">
+                    <div class="proj-header">
+                        <span>Year</span><span>Users</span><span>B2C</span><span>B2B/B2G</span><span>Total ARR</span>
+                    </div>
+                    <div class="proj-row">
+                        <span class="proj-year">Year 1</span>
+                        <span>2,500</span>
+                        <span>₹29.7L</span>
+                        <span>₹20L</span>
+                        <span class="proj-total">₹49.7L</span>
+                    </div>
+                    <div class="proj-row">
+                        <span class="proj-year">Year 2</span>
+                        <span>25,000</span>
+                        <span>₹2.97Cr</span>
+                        <span>₹1.5Cr</span>
+                        <span class="proj-total">₹4.47Cr</span>
+                    </div>
+                    <div class="proj-row highlight">
+                        <span class="proj-year">Year 3</span>
+                        <span>100,000</span>
+                        <span>₹11.88Cr</span>
+                        <span>₹8Cr</span>
+                        <span class="proj-total">₹19.88Cr</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 9: Technology -->
+    <section class="slide slide-tech" id="tech">
+        <div class="slide-inner">
+            <div class="section-label">TECHNOLOGY</div>
+            <h2 class="section-title">World-Class Data,<br><span class="gradient-text">Zero Infrastructure Cost</span></h2>
+            <p class="section-desc">ISRO and INCOIS provide the best ocean data in Asia — for free. We just need to make it understandable.</p>
+
+            <div class="tech-stack">
+                <div class="tech-layer">
+                    <div class="tech-layer-label">DATA SOURCES</div>
+                    <div class="tech-items">
+                        <div class="tech-item">
+                            <span class="tech-badge govt">GOVT</span>
+                            ISRO Oceansat-3
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-badge govt">GOVT</span>
+                            INCOIS PFZ/OSF
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-badge govt">GOVT</span>
+                            IMD Weather
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-badge field">FIELD</span>
+                            Market Prices
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-badge crowd">CROWD</span>
+                            Catch Logs
+                        </div>
+                    </div>
+                </div>
+                <div class="tech-arrow-down">▼</div>
+                <div class="tech-layer">
+                    <div class="tech-layer-label">INTELLIGENCE ENGINE</div>
+                    <div class="tech-items">
+                        <div class="tech-item">Weather Processing</div>
+                        <div class="tech-item">Fish Zone ML</div>
+                        <div class="tech-item">Price Analytics</div>
+                        <div class="tech-item">Vernacular Translation</div>
+                    </div>
+                </div>
+                <div class="tech-arrow-down">▼</div>
+                <div class="tech-layer">
+                    <div class="tech-layer-label">DELIVERY</div>
+                    <div class="tech-items">
+                        <div class="tech-item">
+                            <span class="tech-badge wa">WhatsApp</span>
+                            Business API
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tech-cost-banner">
+                <div class="tech-cost">
+                    <span class="tech-cost-number">₹15-20K</span>
+                    <span class="tech-cost-label">/month total infrastructure cost for MVP</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 10: Team (Placeholder) -->
+    <section class="slide slide-team" id="team">
+        <div class="slide-inner">
+            <div class="section-label">THE TEAM</div>
+            <h2 class="section-title">Built by People Who<br><span class="gradient-text">Understand Both Worlds</span></h2>
+            
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-avatar">
+                        <div class="team-avatar-placeholder">👤</div>
+                    </div>
+                    <h3>Founder / CEO</h3>
+                    <p class="team-role">Product & Strategy</p>
+                    <p class="team-desc">Deep understanding of India's blue economy. Responsible for product vision, fisherman research, and government partnerships.</p>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar">
+                        <div class="team-avatar-placeholder">💻</div>
+                    </div>
+                    <h3>CTO</h3>
+                    <p class="team-role">Engineering & Data</p>
+                    <p class="team-desc">Full-stack development, WhatsApp API integration, ISRO/INCOIS data pipeline, and ML model development.</p>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar">
+                        <div class="team-avatar-placeholder">🤝</div>
+                    </div>
+                    <h3>Field Operations Lead</h3>
+                    <p class="team-role">On-Ground Execution</p>
+                    <p class="team-desc">Coastal community native. Manages fisherman relationships, cooperative partnerships, and daily price collection.</p>
+                </div>
+            </div>
+
+            <div class="advisors">
+                <h3>Key Partnerships & Advisors</h3>
+                <div class="advisor-logos">
+                    <div class="advisor-logo">INCOIS</div>
+                    <div class="advisor-logo">CMFRI</div>
+                    <div class="advisor-logo">Goa Fisheries Dept</div>
+                    <div class="advisor-logo">ISRO/NRSC</div>
+                    <div class="advisor-logo">Coast Guard</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 11: The Ask -->
+    <section class="slide slide-ask" id="ask">
+        <div class="slide-inner">
+            <div class="section-label">THE ASK</div>
+            <h2 class="section-title">Help Us Put Intelligence<br><span class="gradient-text">In Every Fisherman's Pocket</span></h2>
+
+            <div class="ask-content">
+                <div class="ask-card ask-primary">
+                    <h3>Seed Funding: ₹25-50 Lakhs</h3>
+                    <div class="ask-breakdown">
+                        <div class="ask-item">
+                            <span class="ask-percent">40%</span>
+                            <span class="ask-use">Product Development (Backend, WhatsApp API, ML pipeline)</span>
+                        </div>
+                        <div class="ask-item">
+                            <span class="ask-percent">25%</span>
+                            <span class="ask-use">Field Operations (Goa rollout, cooperative onboarding)</span>
+                        </div>
+                        <div class="ask-item">
+                            <span class="ask-percent">20%</span>
+                            <span class="ask-use">Team (Full-stack dev + Field ops hire)</span>
+                        </div>
+                        <div class="ask-item">
+                            <span class="ask-percent">15%</span>
+                            <span class="ask-use">WhatsApp API costs + infrastructure for 12 months</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ask-milestones">
+                    <h3>What We'll Achieve</h3>
+                    <div class="milestone-list">
+                        <div class="milestone">
+                            <span class="milestone-time">Month 2</span>
+                            <span class="milestone-text">Working WhatsApp bot live in Goa</span>
+                        </div>
+                        <div class="milestone">
+                            <span class="milestone-time">Month 4</span>
+                            <span class="milestone-text">500 fishermen registered, 60% DAU</span>
+                        </div>
+                        <div class="milestone">
+                            <span class="milestone-time">Month 8</span>
+                            <span class="milestone-text">2,500 users, Kerala expansion begins</span>
+                        </div>
+                        <div class="milestone">
+                            <span class="milestone-time">Month 12</span>
+                            <span class="milestone-text">10,000 users, first govt contract, PMMSY grant</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ask-closing">
+                <p class="closing-quote">"The ocean doesn't care about your plan.<br>But 4 million fishermen desperately need one."</p>
+                <div class="ask-cta-group">
+                    <a href="mailto:hello@fishermanos.in" class="btn btn-primary btn-large">Let's Talk →</a>
+                </div>
+                <div class="closing-tagline">
+                    <span class="nav-logo closing-logo">🌊</span>
+                    <span>Fisherman OS</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="nav-logo">🌊</span> Fisherman OS
+            </div>
+            <div class="footer-links">
+                <span>Blue Economy × Climate Adaptation</span>
+                <span>·</span>
+                <span>Goa, India</span>
+            </div>
+            <div class="footer-copy">© 2026 Fisherman OS. Saving lives, fuel, and livelihoods.</div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
