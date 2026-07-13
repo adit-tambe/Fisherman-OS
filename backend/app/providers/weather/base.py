@@ -3,8 +3,26 @@
 import abc
 from dataclasses import dataclass, field
 from datetime import date
+from typing import Optional
 
 from app.enums import WeatherSource
+
+
+@dataclass
+class CoastalReport:
+    """Per-point weather + PFZ report for a nearby coastal location."""
+    name: str
+    latitude: float
+    longitude: float
+    wind_speed_kmh: float
+    wave_height_m: float
+    rain_probability: int
+    wind_direction: str
+    # PFZ (Potential Fishing Zone) data from INCOIS
+    pfz_direction: str = ""       # e.g. "SE"
+    pfz_bearing_deg: str = ""     # e.g. "142"
+    pfz_distance_km: str = ""     # e.g. "112-117"
+    pfz_depth_m: str = ""         # e.g. "45-50"
 
 
 @dataclass
@@ -21,6 +39,8 @@ class WeatherReading:
     rain_timing: str | None = None            # human hint, e.g. "after 2PM"
     # Per-hour (next 6h) wind/wave used to build the 🟢🟢🟡 outlook strip.
     hourly: list[tuple[float, float, int]] = field(default_factory=list)  # (wind, wave, rain%)
+    # Per-coast breakdown when multiple INCOIS points were used
+    coastal_reports: list[CoastalReport] = field(default_factory=list)
 
 
 class WeatherProvider(abc.ABC):

@@ -50,13 +50,5 @@ async def send_message(
     result = await get_provider().send_text(phone, text)
     if not result.ok:
         logger.error("Send to %s failed: %s", phone, result.error)
-    await log_message(
-        session,
-        phone=phone,
-        direction=MessageDirection.OUTBOUND,
-        content=text,
-        user_id=user_id,
-        message_type=message_type,
-        provider_message_id=result.provider_message_id,
-    )
+    # Outbound messages are not logged to DB — only inbound messages are stored
     return result

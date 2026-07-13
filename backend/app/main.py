@@ -40,11 +40,21 @@ async def lifespan(app: FastAPI):
     stop_scheduler()
 
 
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI(
     title="Fisherman OS",
     description="WhatsApp intelligence layer for artisanal fishermen — Goa MVP (Phase 1)",
     version=__version__,
     lifespan=lifespan,
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 app.include_router(health.router)

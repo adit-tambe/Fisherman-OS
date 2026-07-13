@@ -10,8 +10,10 @@ from datetime import date, datetime
 from app.enums import Language, SafetyLevel
 from app.localization.strings import t
 from app.models import SOSAlert, User, WeatherForecast
+from app.providers.weather.base import CoastalReport
 from app.seeds import species_display_name
 from app.services.price_service import MarketTip
+from app.services.safety import classify_sea_state
 from app.services.sos_service import maps_link
 
 _SAFETY_KEY = {
@@ -89,17 +91,86 @@ def morning_forecast(user: User, forecast: WeatherForecast, now: datetime) -> st
     return "\n".join(lines)
 
 
-def detailed_forecast(user: User, forecast: WeatherForecast, now: datetime) -> str:
-    """Reply to "1" — morning forecast plus source/issue metadata."""
+def detailed_forecast(user: User, forecast: WeatherForecast, now: datetime, coastal_reports: list | None = None) -> str:
+    """Reply to '1' — coast-by-coast conditions with fishing suggestion."""
     language = user.language
-    body = morning_forecast(user, forecast, now)
-    header, _, rest = body.partition("\n")
-    detail_header = f"{header} — {t('detailed_forecast_title', language)}"
-    meta = (
-        f"\n\n{t('forecast_source', language)}: {forecast.source.value.upper()}"
-        f" | {t('issued_at', language)}: {_format_time(forecast.issued_at)} IST"
-    )
-    return detail_header + "\n" + rest + meta
+    village_name = user.village.name if user.village else "your area"
+    level = forecast.safety_level
+
+    lines = [
+        f"🌊 *Fisherman OS — {village_name}*",
+        f"📅 {_format_date(forecast.forecast_date)} | {_format_time(now)}",
+        f"📡 Source: {forecast.source.value.upper()}",
+        "",
+    ]
+
+    if coastal_reports and len(coastal_reports) >= 1:
+        # Score each coast: lower is safer (SAFE=0, CAUTION=1, DANGER=2)
+        _level_score = {"SAFE": 0, "CAUTION": 1, "DANGER": 2}
+
+        scored = []
+        for report in coastal_reports:
+            assessment = classify_sea_state(report.wind_speed_kmh, report.wave_height_m, report.rain_probability)
+            scored.append((assessment.level, report))
+
+        lines.append("🗺️ *Nearby Sea Conditions:*")
+        lines.append("─" * 28)
+        for lv, report in scored:
+            condition_label = {
+                "SAFE": "SAFE TO GO",
+                "CAUTION": "CAUTION",
+                "DANGER": "DANGER — AVOID",
+            }.get(lv.value, lv.value)
+            lines.append(f"{lv.emoji} *{report.name}*: {condition_label}")
+            lines.append(f"   Wind: {report.wind_speed_kmh:.0f} km/h {report.wind_direction} | Waves: {report.wave_height_m:.1f}m | Rain: {report.rain_probability}%")
+            if report.pfz_bearing_deg:
+                pfz = f"   🎣 Fish zone: {report.pfz_direction} ({report.pfz_bearing_deg}°)"
+                if report.pfz_distance_km:
+                    pfz += f", {report.pfz_distance_km} km out"
+                if report.pfz_depth_m:
+                    pfz += f", depth {report.pfz_depth_m}m"
+                lines.append(pfz)
+            lines.append("")
+
+        # Recommend the safest coast(s) with a PFZ
+        safest = [
+            (lv, r) for lv, r in scored
+            if _level_score.get(lv.value, 9) == min(_level_score.get(l.value, 9) for l, _ in scored)
+        ]
+        safest_with_pfz = [(lv, r) for lv, r in safest if r.pfz_bearing_deg]
+        pick = safest_with_pfz[0] if safest_with_pfz else safest[0] if safest else None
+
+        if pick:
+            lv, best = pick
+            lines.append("─" * 28)
+            lines.append(f"✅ *Best option today:*")
+            lines.append(f"   Head to *{best.name}*")
+            if best.pfz_bearing_deg:
+                lines.append(f"   Go {best.pfz_direction} ({best.pfz_bearing_deg}°), {best.pfz_distance_km} km")
+                if best.pfz_depth_m:
+                    lines.append(f"   Target depth: {best.pfz_depth_m}m")
+            lines.append("")
+
+    else:
+        # Fallback to single-point summary
+        lines += [
+            f"{_SKY_EMOJI[level]} Overall: {safety_line(level, language)}",
+            "",
+            f"🌬️ Wind: {forecast.wind_speed_kmh:.0f} km/h {forecast.wind_direction}",
+            f"🌊 Waves: {forecast.wave_height_m:.1f}m ({_wave_description(forecast.wave_height_m, language)})",
+            f"🌧️ Rain: {_rain_line(forecast, language)}",
+        ]
+        if forecast.sea_temp_c is not None:
+            lines.append(f"🌡️ Sea temp: {forecast.sea_temp_c:.1f}°C")
+        if forecast.advisory:
+            lines += ["", f"⚠️ {forecast.advisory}"]
+        lines.append("")
+
+    lines += [
+        t("menu_footer", language),
+    ]
+    return "\n".join(lines)
+
 
 
 def price_digest(

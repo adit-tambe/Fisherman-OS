@@ -304,10 +304,10 @@ async def _send_morning_forecast(session: AsyncSession, user: User) -> list[str]
         return [await _reply(session, user, t("forecast_unavailable", user.language))]
     now = _now_ist()
     try:
-        forecast = await weather_service.get_or_create_forecast(session, village, now.date())
-    except Exception:
+        forecast, _ = await weather_service.get_or_create_forecast(session, village, now.date())
+    except Exception as exc:
         logger.exception("Forecast fetch failed for %s", village.name)
-        return [await _reply(session, user, t("forecast_unavailable", user.language))]
+        return [await _reply(session, user, f"⚠️ Forecast error for {village.name}:\n{exc}")]
     return [await _reply(
         session, user, composer.morning_forecast(user, forecast, now),
         MessageType.MORNING_FORECAST,
@@ -320,12 +320,12 @@ async def _send_detailed_forecast(session: AsyncSession, user: User) -> list[str
         return [await _reply(session, user, t("forecast_unavailable", user.language))]
     now = _now_ist()
     try:
-        forecast = await weather_service.get_or_create_forecast(session, village, now.date())
-    except Exception:
+        forecast, coastal_reports = await weather_service.get_or_create_forecast(session, village, now.date())
+    except Exception as exc:
         logger.exception("Forecast fetch failed for %s", village.name)
-        return [await _reply(session, user, t("forecast_unavailable", user.language))]
+        return [await _reply(session, user, f"⚠️ Forecast error for {village.name}:\n{exc}")]
     return [await _reply(
-        session, user, composer.detailed_forecast(user, forecast, now),
+        session, user, composer.detailed_forecast(user, forecast, now, coastal_reports),
         MessageType.DETAILED_FORECAST,
     )]
 

@@ -44,3 +44,14 @@ async def gupshup_webhook(request: Request, db: AsyncSession = Depends(get_db)) 
     except Exception:
         logger.exception("Failed to handle inbound message from %s", inbound.phone)
         return {"status": "error"}
+
+from app.services.messenger import get_provider
+from app.providers.whatsapp.console import ConsoleWhatsAppProvider
+
+@router.get("/gupshup/simulator/messages")
+async def get_simulator_messages():
+    provider = get_provider()
+    if isinstance(provider, ConsoleWhatsAppProvider):
+        # provider.sent is a list of tuples (phone, text)
+        return [{"phone": phone, "text": text} for phone, text in provider.sent]
+    return []

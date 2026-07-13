@@ -24,7 +24,7 @@ services:
     environment:
       DATABASE_URL: postgresql+asyncpg://fisherman:fisherman@db:5432/fisherman_os
       WHATSAPP_PROVIDER: console
-      WEATHER_PROVIDER: synthetic
+      WEATHER_PROVIDER: openmeteo
       ENABLE_SCHEDULER: "true"
       ADMIN_API_KEY: local-dev-key
     ports:

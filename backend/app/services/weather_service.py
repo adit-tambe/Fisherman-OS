@@ -8,14 +8,14 @@ synthetic keeps dev/pilot demos alive with deterministic data.
 import logging
 from datetime import date
 
-from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.config import get_settings
 from app.enums import SafetyLevel, WeatherSource
 from app.models import Village, WeatherForecast
-from app.providers.weather.base import WeatherProvider, WeatherReading, WeatherUnavailable
+from app.providers.weather.base import WeatherProvider, WeatherReading, WeatherUnavailable, CoastalReport
 from app.providers.weather.incois import INCOISProvider
+from app.providers.weather.openmeteo import OpenMeteoProvider
 from app.providers.weather.openweathermap import OpenWeatherMapProvider
 from app.providers.weather.synthetic import SyntheticWeatherProvider
 from app.services.safety import classify_sea_state
@@ -26,19 +26,18 @@ _PROVIDERS: dict[str, type[WeatherProvider]] = {
     "incois": INCOISProvider,
     "openweathermap": OpenWeatherMapProvider,
     "synthetic": SyntheticWeatherProvider,
+    "openmeteo": OpenMeteoProvider,
 }
 
 
 def build_provider_chain() -> list[WeatherProvider]:
     mode = get_settings().weather_provider
     if mode == "auto":
-        return [INCOISProvider(), OpenWeatherMapProvider(), SyntheticWeatherProvider()]
+        return [OpenMeteoProvider(), INCOISProvider(), OpenWeatherMapProvider()]
     provider_cls = _PROVIDERS.get(mode)
     if provider_cls is None:
         raise ValueError(f"Unknown weather_provider: {mode!r}")
     chain: list[WeatherProvider] = [provider_cls()]
-    if mode != "synthetic":
-        chain.append(SyntheticWeatherProvider())  # never leave fishermen with no forecast
     return chain
 
 
@@ -46,7 +45,11 @@ async def fetch_reading(village: Village, day: date) -> WeatherReading:
     last_error: Exception | None = None
     for provider in build_provider_chain():
         try:
-            reading = await provider.fetch(village.latitude, village.longitude, day)
+            # Pass village_name as a hint for the fallback label
+            if hasattr(provider, 'fetch') and 'village_name' in provider.fetch.__code__.co_varnames:
+                reading = await provider.fetch(village.latitude, village.longitude, day, village_name=village.name)
+            else:
+                reading = await provider.fetch(village.latitude, village.longitude, day)
             logger.info("Weather for %s on %s from %s", village.name, day, provider.source.value)
             return reading
         except WeatherUnavailable as exc:
@@ -80,22 +83,10 @@ def _hourly_levels(reading: WeatherReading, day_level: SafetyLevel) -> list[Safe
         levels.append(levels[-1])
     return levels
 
-
 async def get_or_create_forecast(
     session: AsyncSession, village: Village, day: date
-) -> WeatherForecast:
-    """Return the cached forecast for (village, day), fetching it if needed."""
-    existing = (
-        await session.execute(
-            select(WeatherForecast).where(
-                WeatherForecast.village_id == village.id,
-                WeatherForecast.forecast_date == day,
-            )
-        )
-    ).scalar_one_or_none()
-    if existing is not None:
-        return existing
-
+) -> tuple[WeatherForecast, list[CoastalReport]]:
+    """Always fetch a fresh forecast — no DB caching."""
     reading = await fetch_reading(village, day)
     assessment = classify_sea_state(
         reading.wind_speed_kmh, reading.wave_height_m, reading.rain_probability
@@ -116,10 +107,8 @@ async def get_or_create_forecast(
         hourly_levels=",".join(level.value for level in hourly),
         source=reading.source,
     )
-    session.add(forecast)
-    await session.commit()
-    await session.refresh(forecast)
-    return forecast
+    # Not persisted — transient object only, no DB commit
+    return forecast, reading.coastal_reports
 
 
 async def refresh_forecast(session: AsyncSession, village: Village, day: date) -> WeatherForecast:
@@ -135,7 +124,8 @@ async def refresh_forecast(session: AsyncSession, village: Village, day: date) -
     if existing is not None:
         await session.delete(existing)
         await session.commit()
-    return await get_or_create_forecast(session, village, day)
+    forecast, _ = await get_or_create_forecast(session, village, day)
+    return forecast
 
 
 # Re-export for callers that only need the source enum default

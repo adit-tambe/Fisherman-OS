@@ -1,0 +1,177 @@
+/* Base styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Container simulating a mobile screen */
+.simulator-container {
+    width: 100%;
+    max-width: 400px;
+    height: 90vh;
+    max-height: 800px;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.phone-frame {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+/* Header (WhatsApp Dark Green) */
+.chat-header {
+    background-color: #075E54;
+    color: #fff;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    z-index: 10;
+}
+
+.profile-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatar img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.contact-info h2 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.contact-info .status {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Chat Area */
+.chat-area {
+    flex: 1;
+    background-color: #ECE5DD;
+    /* Simulate WhatsApp chat background pattern */
+    background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png');
+    background-repeat: repeat;
+    background-size: 300px;
+    padding: 20px 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Chat Bubbles */
+.message-bubble {
+    max-width: 80%;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.4;
+    position: relative;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
+
+.message-bubble.sent {
+    align-self: flex-end;
+    background-color: #DCF8C6;
+    border-top-right-radius: 0;
+}
+
+.message-bubble.received {
+    align-self: flex-start;
+    background-color: #fff;
+    border-top-left-radius: 0;
+}
+
+/* Time in bubble */
+.message-time {
+    font-size: 10px;
+    color: rgba(0, 0, 0, 0.45);
+    float: right;
+    margin-top: 8px;
+    margin-left: 10px;
+}
+
+/* Input Area */
+.input-area {
+    display: flex;
+    padding: 10px;
+    background-color: #f0f0f0;
+    align-items: center;
+    gap: 8px;
+}
+
+.input-container {
+    flex: 1;
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 8px 16px;
+}
+
+.input-container input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    background: transparent;
+    font-family: inherit;
+}
+
+.send-btn {
+    background-color: #128C7E;
+    color: white;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    transition: background-color 0.2s;
+}
+
+.send-btn:hover {
+    background-color: #075E54;
+}
+
+.send-btn svg {
+    margin-left: 4px; /* visually center the paper plane */
+}
+
+/* Loading animation for polling */
+.typing-indicator {
+    font-size: 12px;
+    color: #666;
+    font-style: italic;
+    margin-top: 5px;
+    display: none;
+}

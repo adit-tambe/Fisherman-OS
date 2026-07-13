@@ -80,3 +80,4 @@ class WeatherSource(str, enum.Enum):
     INCOIS = "incois"
     OPENWEATHERMAP = "openweathermap"
     SYNTHETIC = "synthetic"
+    OPENMETEO = "openmeteo"
